@@ -391,7 +391,7 @@ fn show(state: &mut AppState, qh: &QueueHandle<AppState>) -> bool {
     let layer_surface = layer_shell.get_layer_surface(
         &wl_surf,
         None,
-        zwlr_layer_shell_v1::Layer::Top,
+        zwlr_layer_shell_v1::Layer::Overlay,
         "hyprexpose".to_owned(),
         qh,
         (),
