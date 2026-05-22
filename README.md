@@ -57,6 +57,14 @@ Disable window previews (uses colored rectangles instead):
 hyprexpose --no-preview &
 ```
 
+Enable mouse navigation (hover to select, left-click to switch, right-click to move active window):
+
+```
+hyprexpose --allow-mouse &
+```
+
+Flags can be combined: `hyprexpose --no-preview --allow-mouse &`.
+
 Toggle the overlay:
 
 ```
