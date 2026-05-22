@@ -5,6 +5,8 @@
 
 Lightweight workspace overview for [Hyprland](https://hyprland.org). Shows active workspaces with real window thumbnails, navigate with keyboard, press Enter to switch.
 
+> **Requires Hyprland >= 0.55** (uses the Lua-based IPC dispatch introduced in that release).
+
 ![Demo](demo.gif)
 
 ## Features
