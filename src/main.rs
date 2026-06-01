@@ -70,6 +70,15 @@ const XKB_KEY_J: u32 = 0x006a;
 const XKB_KEY_K: u32 = 0x006b;
 const XKB_KEY_L: u32 = 0x006c;
 const XKB_KEY_M: u32 = 0x006d;
+const XKB_KEY_1: u32 = 0x0031;
+const XKB_KEY_2: u32 = 0x0032;
+const XKB_KEY_3: u32 = 0x0033;
+const XKB_KEY_4: u32 = 0x0034;
+const XKB_KEY_5: u32 = 0x0035;
+const XKB_KEY_6: u32 = 0x0036;
+const XKB_KEY_7: u32 = 0x0037;
+const XKB_KEY_8: u32 = 0x0038;
+const XKB_KEY_9: u32 = 0x0039;
 
 fn keycode_to_keysym(keycode: u32) -> u32 {
     // Hyprland sends raw evdev keycodes via wl_keyboard.
@@ -85,6 +94,15 @@ fn keycode_to_keysym(keycode: u32) -> u32 {
         37  => XKB_KEY_K,
         38  => XKB_KEY_L,
         50  => XKB_KEY_M,
+        2   => XKB_KEY_1,
+        3   => XKB_KEY_2,
+        4   => XKB_KEY_3,
+        5   => XKB_KEY_4,
+        6   => XKB_KEY_5,
+        7   => XKB_KEY_6,
+        8   => XKB_KEY_7,
+        9   => XKB_KEY_8,
+        10  => XKB_KEY_9,
         _   => 0,
     }
 }
@@ -176,6 +194,13 @@ impl AppState {
 
         match keysym {
             XKB_KEY_ESCAPE => return true,
+            XKB_KEY_1 ..= XKB_KEY_9 => {
+                let idx = (keysym - XKB_KEY_1) as usize;
+                if idx < n {
+                    ipc::switch_workspace(self.workspaces[idx].id);
+                }
+                return true;
+            }
             XKB_KEY_RETURN => {
                 if self.selected < n {
                     ipc::switch_workspace(self.workspaces[self.selected].id);
