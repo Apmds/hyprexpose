@@ -165,8 +165,9 @@ struct AppState {
 
 impl AppState {
     fn new(no_preview: bool, allow_mouse: bool, config: Config) -> Self {
-        // CLI --no-preview flag overrides config
+        // CLI flags override config values (OR semantics: flag=true forces on)
         let no_preview = no_preview || config.behavior.no_preview;
+        let allow_mouse = allow_mouse || config.behavior.allow_mouse;
         Self {
             compositor: None,
             shm: None,
