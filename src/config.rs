@@ -131,6 +131,10 @@ pub struct BehaviorConfig {
     pub no_preview: bool,
     /// After moving a window with 'm', also switch to the destination workspace.
     pub switch_on_move: bool,
+    /// Enable mouse navigation (hover to select, left-click to switch,
+    /// right-click to move the active window). Overridden by the
+    /// `--allow-mouse` CLI flag when set.
+    pub allow_mouse: bool,
 }
 
 impl Default for BehaviorConfig {
@@ -138,6 +142,7 @@ impl Default for BehaviorConfig {
         Self {
             no_preview: false,
             switch_on_move: true,
+            allow_mouse: false,
         }
     }
 }
@@ -152,11 +157,26 @@ pub struct Config {
     pub behavior: BehaviorConfig,
 }
 
+/// Bundled at build time so a first run can seed the user's config dir.
+const EXAMPLE_CONFIG: &str = include_str!("../config.example.toml");
+
 impl Config {
     /// Load from `$XDG_CONFIG_HOME/hyprexpose/config.toml` (falls back to
-    /// `~/.config/hyprexpose/config.toml`). Missing file → silent defaults.
+    /// `~/.config/hyprexpose/config.toml`). On first run the file is created
+    /// from the bundled `config.example.toml` so users have a template to
+    /// edit. Errors creating the file are ignored — defaults are used.
     pub fn load() -> Self {
         let path = config_path();
+
+        if !path.exists() {
+            if let Some(parent) = path.parent() {
+                let _ = std::fs::create_dir_all(parent);
+            }
+            if std::fs::write(&path, EXAMPLE_CONFIG).is_ok() {
+                eprintln!("hyprexpose: created default config at {}", path.display());
+            }
+        }
+
         let Ok(text) = std::fs::read_to_string(&path) else {
             return Self::default();
         };

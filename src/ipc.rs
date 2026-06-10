@@ -200,12 +200,12 @@ fn dispatch(cmd: &str) {
 }
 
 pub fn switch_workspace(id: i32) {
-    dispatch(&format!("workspace {id}"));
+    dispatch(&format!("hl.dsp.focus({{ workspace = \"{id}\" }})"));
 }
 
 pub fn move_window_to_workspace(window_address: u64, workspace_id: i32) {
     dispatch(&format!(
-        "movetoworkspacesilent {workspace_id},address:0x{window_address:x}"
+        "hl.dsp.window.move({{ workspace = {workspace_id}, window = \"address:0x{window_address:x}\", silent = true }})"
     ));
 }
 

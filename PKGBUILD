@@ -6,7 +6,7 @@ pkgdesc='Lightweight workspace overview for Hyprland with live window thumbnails
 arch=('x86_64')
 url='https://github.com/ThiagoAVicente/hyprexpose'
 license=('MIT')
-depends=('wayland' 'cairo' 'pango' 'hyprland')
+depends=('wayland' 'cairo' 'pango' 'hyprland>=0.55')
 makedepends=('git' 'rust' 'cargo')
 provides=('hyprexpose')
 conflicts=('hyprexpose')

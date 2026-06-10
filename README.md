@@ -5,6 +5,8 @@
 
 Lightweight workspace overview for [Hyprland](https://hyprland.org). Shows active workspaces with real window thumbnails, navigate with keyboard, press Enter to switch.
 
+> **Requires Hyprland >= 0.55** (uses the Lua-based IPC dispatch introduced in that release).
+
 ![Demo](demo.gif)
 
 ## Features
@@ -54,6 +56,14 @@ Disable window previews (uses colored rectangles instead):
 ```
 hyprexpose --no-preview &
 ```
+
+Enable mouse navigation (hover to select, left-click to switch, right-click to move active window):
+
+```
+hyprexpose --allow-mouse &
+```
+
+Flags can be combined: `hyprexpose --no-preview --allow-mouse &`.
 
 Toggle the overlay:
 

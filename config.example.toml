@@ -74,3 +74,10 @@ no_preview = false
 # also switch to that workspace (and close the overlay).
 # Set to false to move silently and stay on the current workspace.
 switch_on_move = true
+
+# Enable mouse navigation inside the overlay:
+#   - hover a workspace card to select it
+#   - left-click   → switch to that workspace
+#   - right-click  → move the active window to that workspace
+# The `--allow-mouse` CLI flag forces this on regardless of the value here.
+allow_mouse = false
